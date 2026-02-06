@@ -2,7 +2,12 @@
 
 Backend assignment project built using **Node.js + TypeScript + Express + PostgreSQL**.
 
-Implements authentication, RBAC, experiences management, and booking system.
+This system allows:
+- User authentication (JWT)
+- Role Based Access Control (RBAC)
+- Hosts to create & publish experiences
+- Users to book experiences
+- Admin to moderate/block experiences
 
 ---
 
@@ -10,30 +15,44 @@ Implements authentication, RBAC, experiences management, and booking system.
 
 - Node.js
 - TypeScript
-- Express
+- Express.js
 - PostgreSQL
 - JWT Authentication
 - bcrypt password hashing
 
 ---
 
-## 📦 Setup Instructions
+## ⚡ Quick Start (For Reviewer / Interviewer)
 
-### 1. Install dependencies
+Follow these steps to run the project locally:
+
+### 1️⃣ Clone repository
+git clone <repo-url>
+cd Yoliday
+
+### 2️⃣ Install dependencies
 npm install
 
-### 2. Create PostgreSQL database
+### 3️⃣ Create PostgreSQL database
+Open pgAdmin or psql and run:
 CREATE DATABASE experiences;
 
-### 3. Add environment variables (.env)
+### 4️⃣ Run database schema
+psql -d experiences -f schema.sql
 
-Create `.env` file:
+(OR copy schema.sql into pgAdmin Query Tool and run)
+
+### 5️⃣ Setup environment variables
+Copy:
+.env.example → .env
+
+Then edit .env:
 
 PORT=5000
 DATABASE_URL=postgres://postgres:password@localhost:5432/experiences
 JWT_SECRET=secret
 
-### 4. Run server
+### 6️⃣ Start server
 npm run dev
 
 Server runs at:
@@ -41,14 +60,14 @@ http://localhost:5000
 
 ---
 
-## 👥 Roles
+## 👥 Roles & Permissions
 
 ### User
-- View experiences
+- View published experiences
 - Book seats
 
 ### Host
-- Create experiences
+- Create experiences (draft)
 - Publish experiences
 
 ### Admin
@@ -58,59 +77,11 @@ http://localhost:5000
 
 ## 📌 API Endpoints
 
-### Auth
+### 🔐 Auth
 POST   /auth/signup  
 POST   /auth/login  
 
-### Experiences
-POST   /experiences (host/admin)  
-PATCH  /experiences/:id/publish  
-PATCH  /experiences/:id/block  
-GET    /experiences  
-
-### Bookings
-POST   /bookings/:id  
-
-### System
-GET    /health  
-
----
-
-## 🧪 Test Flow (Postman)
-
-1. Login host  
-2. Create experience  
-3. Publish  
-4. Login user  
-5. Book seats  
-6. Login admin  
-7. Block experience  
-
----
-
-## 📁 Project Structure
-
-src/
- ├─ routes/
- ├─ middlewares/
- ├─ db/
- ├─ app.ts
- └─ server.ts
-
----
-
-## ✅ Features Implemented
-
-✔ JWT authentication  
-✔ Role Based Access Control (RBAC)  
-✔ Host create & publish  
-✔ Admin block  
-✔ Booking system  
-✔ Validations  
-✔ Health endpoint  
-✔ PostgreSQL schema  
-
----
-
-## 👨‍💻 Author
-Backend Developer Assignment Submission
+### 🎯 Experiences
+POST   /experiences              (host/admin)  
+PATCH  /experiences/:id/publish  (host/admin)  
+PATCH  /experiences/:i
