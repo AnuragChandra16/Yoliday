@@ -84,4 +84,122 @@ POST   /auth/login
 ### 🎯 Experiences
 POST   /experiences              (host/admin)  
 PATCH  /experiences/:id/publish  (host/admin)  
-PATCH  /experiences/:i
+PATCH  /experiences/:id/block    (admin)  
+GET    /experiences              (public)  
+
+### 🎟 Bookings
+POST   /bookings/:id             (user)  
+
+### ❤️ Health
+GET    /health  
+
+---
+
+## 🧪 Example API Requests (Postman)
+
+### Host flow
+
+Create host:
+POST /auth/signup
+{
+  "email": "host@test.com",
+  "password": "123456",
+  "role": "host"
+}
+
+Login:
+POST /auth/login
+
+Create experience:
+POST /experiences
+Authorization: Bearer HOST_TOKEN
+{
+  "title": "Goa Trip",
+  "location": "Goa",
+  "price": 2000
+}
+
+Publish:
+PATCH /experiences/1/publish
+Authorization: Bearer HOST_TOKEN
+
+
+---
+
+### User flow
+
+Signup + login:
+POST /auth/signup
+POST /auth/login
+
+Book:
+POST /bookings/1
+Authorization: Bearer USER_TOKEN
+{
+  "seats": 2
+}
+
+
+---
+
+### Admin flow
+
+Signup + login:
+POST /auth/signup
+(role = admin)
+
+Block:
+PATCH /experiences/1/block
+Authorization: Bearer ADMIN_TOKEN
+
+
+---
+
+## 📁 Project Structure
+
+src/
+ ├─ routes/
+ ├─ middlewares/
+ ├─ db/
+ ├─ app.ts
+ └─ server.ts
+
+Root/
+ ├─ schema.sql
+ ├─ .env.example
+ ├─ README.md
+ ├─ package.json
+ └─ tsconfig.json
+
+---
+
+## 🗄 Database Tables
+
+- users
+- experiences
+- bookings
+
+Schema provided in:
+schema.sql
+
+---
+
+## ✅ Features Implemented
+
+✔ JWT authentication  
+✔ Password hashing (bcrypt)  
+✔ Role Based Access Control (RBAC)  
+✔ Host create + publish  
+✔ Admin block  
+✔ Booking system  
+✔ Duplicate booking prevention  
+✔ Input validations  
+✔ Health endpoint  
+✔ PostgreSQL schema setup  
+
+---
+
+## 👨‍💻 Author
+
+Anurag Chandra  
+Backend Developer Assignment Submission
